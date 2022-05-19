@@ -123,3 +123,21 @@ task15:-
     elbyindex(L,I,Elind),
     maxElem(L,Elmax),
     (Elind =:= Elmax,write(yes);write(no)),!.
+
+% 16(11) one of the elements is different from the others. find its
+% value.
+kolvo(L,N,Ot):-kolvo(L,N,Ot,0).
+kolvo([],_,K,K):-!.
+kolvo([H|T],El,Ot,K):-
+    H =:= El, K1 is K+1,!,
+    kolvo(T,El,Ot,K1);
+    kolvo(T,El,Ot,K),!.
+
+
+otl(L,Ot):-otl(L,L,Ot,0).
+otl([],_,K,K):-!.
+otl([H|T],L,Ot,C):-
+    kolvo(L,H,K),
+    K =:= 1,!,
+    otl(T,L,Ot,H);
+    otl(T,L,Ot,C),!.
