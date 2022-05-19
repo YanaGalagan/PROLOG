@@ -141,3 +141,22 @@ otl([H|T],L,Ot,C):-
     K =:= 1,!,
     otl(T,L,Ot,H);
     otl(T,L,Ot,C),!.
+%17(13).the elements located to the minimum should be placed at the end
+
+indMinelem([H|T],Ot):-indMinelem(T,Ot,0,1,H).
+indMinelem([],K,K,_,_):-!.
+indMinelem([H|T],Ot,IM,I,Min):-
+    (   H<Min,IM1 is I,Min1 is H;
+    IM1 is IM,Min1 is Min),
+    I1 is I+1,
+    indMinelem(T,Ot,IM1,I1,Min1).
+
+concatL([], List2, List2).
+concatL([H|T],List2,[H|NewList]) :- concatL(T,List2,NewList).
+
+moveBeforeMin([H|T],List):-indMinelem([H|T],Ind),
+    moveBeforeMin([H|T],List,Ind,0,[]).
+moveBeforeMin(L1,List,IndMin,IndMin,L2):- concatL(L1,L2,List),!.
+moveBeforeMin([H|T],List,IndMin,IndNow,NowList):-
+    NewInd is IndNow+1, concatL(NowList,[H],NewList),
+    moveBeforeMin(T,List,IndMin,NewInd,NewList).
