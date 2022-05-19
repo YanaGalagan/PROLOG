@@ -205,3 +205,16 @@ task19:-
     read(N),
     readList(N,L),
     cyclicS(L,1,K), write_list(K).
+%local maximum by index
+
+localMax(L,I):-I1 is I -1, I2 is I+1,elbyindex(L,I1,El1),
+    elbyindex(L,I,El),elbyindex(L,I2,El2),
+    El1<El,El2<El,!.
+
+task20:-
+    write('Input N -'),
+    read(N),
+    readList(N,L),
+    write('Input I -'),
+    read(I),
+    localMax(L,I),!.
