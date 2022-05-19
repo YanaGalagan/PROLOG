@@ -57,3 +57,6 @@ doughter(X):-parent(X,Y),doughter(Y,X),print(Y),nl,fail.
 %12
 wife(X,Y):-woman(X),man(Y),parent(X,K),parent(Y,K),write(yes),!.
 wife(X):-man(X),parent(X,Z),parent(Y,Z),woman(Y),write(Y),nl,!.
+%13
+grandMa(X,Y):-parent(X,Z),parent(Z,Y),woman(X),write(yes),nl,!.
+grandMas(X):-parent(Z,X),parent(Y,Z),woman(Y),write(Y),nl.
