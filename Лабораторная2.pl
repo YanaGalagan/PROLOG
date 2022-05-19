@@ -141,6 +141,12 @@ otl([H|T],L,Ot,C):-
     K =:= 1,!,
     otl(T,L,Ot,H);
     otl(T,L,Ot,C),!.
+task16:-
+    write('input n-'),
+    read(N),
+    readList(N,L),
+    otl(L,K),
+    write(K).
 %17(13).the elements located to the minimum should be placed at the end
 
 indMinelem([H|T],Ot):-indMinelem(T,Ot,0,1,H).
@@ -160,3 +166,42 @@ moveBeforeMin(L1,List,IndMin,IndMin,L2):- concatL(L1,L2,List),!.
 moveBeforeMin([H|T],List,IndMin,IndNow,NowList):-
     NewInd is IndNow+1, concatL(NowList,[H],NewList),
     moveBeforeMin(T,List,IndMin,NewInd,NewList).
+task17:-
+    write('Input N -'),
+    read(N),
+    readList(N,List),
+    moveBeforeMin(List,NewList),
+    write('New List: '),
+    write_list(NewList),!.
+
+%local minimum by index
+
+localMin(L,I):-I1 is I -1, I2 is I+1,elbyindex(L,I1,El1),
+    elbyindex(L,I,El),elbyindex(L,I2,El2),
+    El1>El,El2>El,!.
+
+task18:-
+    write('Input N -'),
+    read(N),
+    readList(N,L),
+    write('Input I -'),
+    read(I),
+    localMin(L,I),!.
+
+
+%cyclic shift of array elements to the left by one position.
+appendL([],X,X).
+appendL([X|T],Y,[X|T1]) :- appendL(T,Y,T1).
+
+
+cyclicS(Result, 0, Result) :- !.
+cyclicS([X|T], N, Result) :-
+    N1 is N - 1,
+    appendL(T, [X], NewList),
+    cyclicS(NewList, N1, Result), !.
+
+task19:-
+    write('Input N -'),
+    read(N),
+    readList(N,L),
+    cyclicS(L,1,K), write_list(K).
