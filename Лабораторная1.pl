@@ -62,3 +62,10 @@ grandMa(X,Y):-parent(X,Z),parent(Z,Y),woman(X),write(yes),nl,!.
 grandMas(X):-parent(Z,X),parent(Y,Z),woman(Y),write(Y),nl.
 %14
 grand_ma_and_da(X,Y):-parent(X,Z),parent(Z,Y),woman(X),woman(Y),write(yes),nl,fail;parent(Y,Z),parent(Z,X),woman(X),woman(Y),write(yes),nl,fail.
+%15
+minch(0,9):-!.
+minch(X,Y):-
+     K is X // 10,
+     N is X mod 10,
+     minch(K,C),
+     Y is min(C,N).
