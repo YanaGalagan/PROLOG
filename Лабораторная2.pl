@@ -87,3 +87,8 @@ findMaxPeriod(D,Index,LocalD, LocalIndex) :-
     (NewLocalD>LocalD,NewLocalIndex is Index; NewLocalIndex is LocalIndex),
     NewIndex is Index + 1,
     findMaxPeriod(D,NewIndex, NewLocalD, NewLocalIndex),!.
+% 14
+% predicat: return list length
+
+length14([],0):-!.
+length14([_|T], CNTS) :- length(T,I), CNTS is I + 1.
