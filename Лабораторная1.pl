@@ -102,3 +102,19 @@ prnot_5D(N,X,Pr):-
     Cifr is N mod 10,
     Newpr is Cifr*Pr,
     prnot_5D(N1,X,Newpr).
+%19
+fib(1,1) :- !.
+fib(2,1) :- !.
+fib(X,Y) :-
+    X1 is X-1,
+    X2 is X-2,
+    fib(X1,Y1),
+    fib(X2, Y2),
+    Y is Y1 + Y2.
+%20
+fib2(N,X):-fib2(1,1,2,N,X).
+fib2(_,F,N,N,F):-!.
+fib2(A,B,K,N,X):-
+    C is A+B,
+    K1 is K+1,
+    fib2(B,C,K1,N,X).
