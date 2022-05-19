@@ -54,3 +54,6 @@ women:-woman(X),write(X),nl,fail.
 %11
 doughter(X,Y):-parent(Y,X),woman(X).
 doughter(X):-parent(X,Y),doughter(Y,X),print(Y),nl,fail.
+%12
+wife(X,Y):-woman(X),man(Y),parent(X,K),parent(Y,K),write(yes),!.
+wife(X):-man(X),parent(X,Z),parent(Y,Z),woman(Y),write(Y),nl,!.
