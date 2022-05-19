@@ -92,3 +92,9 @@ findMaxPeriod(D,Index,LocalD, LocalIndex) :-
 
 length14([],0):-!.
 length14([_|T], CNTS) :- length(T,I), CNTS is I + 1.
+%15.
+readList(0,[]) :- !.
+readList(I,[X|T]) :- write('input - '),read(X), I1 is I - 1, readList(I1, T).
+
+write_list([]) :- !.
+write_list([X|T]) :- write(X), nl, write_list(T).
