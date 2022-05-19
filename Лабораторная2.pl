@@ -98,3 +98,28 @@ readList(I,[X|T]) :- write('input - '),read(X), I1 is I - 1, readList(I1, T).
 
 write_list([]) :- !.
 write_list([X|T]) :- write(X), nl, write_list(T).
+
+%15(3).
+elbyindex(L,I,El):-elbyindex(L,I,El,0).
+elbyindex([H|_],K,H,K):-!.
+elbyindex([_|Tail],I,El,Cou):-
+    I =:= Cou,
+    elbyindex(Tail,Cou,El,Cou);
+    Cou1 is Cou + 1,
+    elbyindex(Tail,I,El,Cou1).
+
+maxElem(L,El):- maxElem(L,-1000,El).
+maxElem([],El,El):-!.
+maxElem([H|T],M,El):-
+    (H>M,M1 is H),
+    maxElem(T,M1,El);
+    maxElem(T,M,El).
+
+task15:-
+    write('input N'),
+    read(N),
+    readList(N,L),
+    read(I),
+    elbyindex(L,I,Elind),
+    maxElem(L,Elmax),
+    (Elind =:= Elmax,write(yes);write(no)),!.
