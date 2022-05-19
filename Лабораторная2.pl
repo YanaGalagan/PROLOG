@@ -54,3 +54,36 @@ task_12(X,Y):-
     proizv(X,K),
     maxdel(X,Z),
     nod(K,Z,Y).
+%13
+
+divBy2(X,R) :-
+    Mod is X mod 2,
+    Val is X div 2,
+    (0 is Mod,divBy2(Val,R);R is X).
+divBy5(X,R) :-
+    Mod is X mod 5,
+    Val is X div 5,
+    (0 is Mod,divBy5(Val,R);R is X).
+numForPeriod(X,R) :- divBy2(X,R1),divBy5(R1,R2),R is R2.
+
+period(D,R) :- numForPeriod(D,Res),period(Res,R,1),!.
+period(D,R,LR) :-
+    B10 is 10**LR,
+    1 is B10 mod D,
+    R is LR,!.
+period(D,R,LR) :-
+    B10 is 10**LR,
+    0 is B10 mod D,
+    R is 0,!.
+period(D,R,LR) :-
+    NewLR is LR + 1,
+    period(D,R, NewLR).
+
+findMaxPeriod(D) :- findMaxPeriod(D,2,0,2).
+findMaxPeriod(D,1000,_,LocalIndex) :- D is LocalIndex,!.
+findMaxPeriod(D,Index,LocalD, LocalIndex) :-
+    period(Index,NextD),
+    NewLocalD is max(NextD,LocalD),
+    (NewLocalD>LocalD,NewLocalIndex is Index; NewLocalIndex is LocalIndex),
+    NewIndex is Index + 1,
+    findMaxPeriod(D,NewIndex, NewLocalD, NewLocalIndex),!.
