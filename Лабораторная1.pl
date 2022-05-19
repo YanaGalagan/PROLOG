@@ -69,3 +69,23 @@ minch(X,Y):-
      N is X mod 10,
      minch(K,C),
      Y is min(C,N).
+%16
+minD(X,Y):-minD(X,Y,9).
+minD(X,Y,Z):- X<10,Y is min(X,Z).
+minD(X,Y,Z):-
+    N is X // 10,
+    K is X mod 10,
+    Z1 is min(Z,K),
+    minD(N,Y,Z1).
+%17
+prnot_5(0,1):-!.
+prnot_5(N,Pr):-
+    N1 is N div 10,
+    Cifr is N mod 10,
+    0 is Cifr mod 5,!,
+    prnot_5(N1,Pr).
+prnot_5(N,Pr):-
+    N1 is N div 10,
+    prnot_5(N1,Predpr),
+    Cifr is N mod 10,
+    Pr is Cifr*Predpr.
