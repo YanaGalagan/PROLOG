@@ -29,3 +29,17 @@ task11:-
     readList(N,L),
     chetnechet(L).
 
+%12.  [a;b]. sum elem >a <b
+
+sumElem([H|T],A,B,S):-sumElem([H|T],A,B,S,0).
+sumElem([],_,_,S,S):-!.
+sumElem([H|T],A,B,S,Sum):-
+    H>=A , B>=H ,Sum1 is Sum+H,!,sumElem(T,A,B,S,Sum1);
+    sumElem(T,A,B,S,Sum),!.
+
+task12:-
+    write('Input N -'),
+    read(N),
+    readList(N,L),
+    write('Input A -'),read(A), write('Input B -'),read(B),
+    sumElem(L,A,B,S),write(S).
