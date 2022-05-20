@@ -43,3 +43,45 @@ task12:-
     readList(N,L),
     write('Input A -'),read(A), write('Input B -'),read(B),
     sumElem(L,A,B,S),write(S).
+
+%13. ƒл€ введенного списка построить два списка L1 и L2, где элементы L1
+% это неповтор€ющиес€ элементы исходного списка, а элемент списка L2 с
+% ноmером i показывает, сколько раз элемент списка L1 с таким номером
+%повтор€етс€ в исходном.
+prov([],_):-!.
+prov([H|T],A):-
+    H=:=A,!,fail.
+prov([H|T],A):-
+    prov(T,A).
+
+kolvo([],_,K,K):-!.
+kolvo([H|T],A,K):-kolvo([H|T],A,K,0).
+kolvo([H|T],A,K,C):-
+    H=:=A,K1 is C+1,kolvo(T,A,K,K1).
+kolvo([H|T],A,K,C):-
+    kolvo(T,A,K,C).
+
+strL1(L,N):-strL1(L,[],N).
+strL1([],K,K):-!.
+strL1([H|T],N,K):-
+    prov(N,H),concatL(N,[H],N1),
+    strL1(T,N1,K).
+strL1([H|T],N,K):-strL1(T,N,K).
+
+
+strL2(L,L1,N):-strL2(L,L1,[],N).
+strL2([],_,K,K):-!.
+strL2([H|T],L1,N,K):-
+    kolvo(L1,H,M),concatL(N,[M],N1),
+    strL2(T,L1,N1,K).
+
+task13:-
+    write('Input N -'),
+    read(N),
+    readList(N,L),
+    strL1(L,M),
+    strL2(M,L,K),
+    write('L1:'),
+    write_list(M),
+    write('L2:'),
+    write_list(K).
